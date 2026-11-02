@@ -19,6 +19,3 @@ Proje; Keloğlan Masalları, Halk Hikayeleri ve Sihirli Masallar olmak üzere 3 
 
 ## 🚀 Çalıştırma
 Proje tek bir dosyadan oluşmaktadır. `index.html` dosyasını herhangi bir güncel web tarayıcısında (Chrome, Edge, Firefox, Safari vb.) açarak doğrudan çalıştırabilirsiniz.
-
-## 🎥 Sunum Videosu
-- **YouTube Sunum Bağlantısı:** [YouTube Video Adresinizi Buraya Yapıştırın]
