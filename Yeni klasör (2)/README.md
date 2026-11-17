@@ -20,5 +20,4 @@ Bu sürümde proje modüler web geliştirme standartlarına uygun olarak üç ay
 
 ## 🚀 Kurulum ve Çalıştırma
 1. Depoyu bilgisayarınıza indirin veya klonlayın:
-   ```bash
-   git clone [https://github.com/orangecrow3-cloud/turk-masallari-kutuphanesi.git](https://github.com/orangecrow3-cloud/turk-masallari-kutuphanesi.git)
+
