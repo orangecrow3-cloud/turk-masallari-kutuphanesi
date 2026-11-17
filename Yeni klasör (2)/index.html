@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Türk Masalları Kütüphanesi - Etnik Ferman Koleksiyonu</title>
+    <!-- Osmanlı / Etnik Tipografi Fontları -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=Faustina:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Harici CSS Bağlantısı -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light">
+
+    <header>
+        <div class="top-controls">
+            <button class="icon-btn" onclick="openRandomFerman()">🎲 Rastgele Aç</button>
+            <button class="icon-btn" id="themeToggleBtn" onclick="toggleTheme()">🌙 Gece Çinisi</button>
+        </div>
+        <h1>Türk Masalları Kütüphanesi</h1>
+        <p>Geleneksel Halk Anlatıları ve Masalları</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- İSTATİSTİK BARI -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-value">📚 8 Masal</span>
+                <span class="stat-label">Toplam Masal</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="readTalesCount">📖 0 / 8</span>
+                <span class="stat-label">Okunan Masal</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">🎭 3 Kategori</span>
+                <span class="stat-label">Halk Anlatısı Türü</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">⏱️ ~2.5 Dk</span>
+                <span class="stat-label">Ortalama Okuma</span>
+            </div>
+        </div>
+
+        <!-- ARAMA VE FİLTRE -->
+        <div class="controls-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Masallarda arama yapın (Örn: Keloğlan...)" onkeyup="filterTales()">
+            </div>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterByCategory('all', this)">Tümü</button>
+                <button class="filter-btn" onclick="filterByCategory('keloglan', this)">Keloğlan Masalları</button>
+                <button class="filter-btn" onclick="filterByCategory('halk', this)">Halk Hikayeleri & Efsaneler</button>
+                <button class="filter-btn" onclick="filterByCategory('diger', this)">Sihirli Masallar</button>
+            </div>
+        </div>
+
+        <!-- BANNERLARA YAKIN TOPLU AÇ/KAPAT BUTONLARI -->
+        <div class="ferman-global-actions">
+            <button class="action-btn-small" onclick="openAllFermans()">📜 Hepsini Aç</button>
+            <button class="action-btn-small" onclick="closeAllFermans()">📁 Hepsini Kapat</button>
+        </div>
+
+        <!-- SONUÇ BULUNAMADI UYARISI -->
+        <div class="no-results" id="noResultsMsg">
+            📜 Aradığınız kritere uygun ferman kütüphanemizde bulunamadı. Lütfen başka bir kelime deneyin.
+        </div>
+
+        <!-- MASAL FERMANLARI LİSTESİ -->
+        <div class="ferman-list-container" id="fermanGrid">
+
+            <!-- 1. MASAL -->
+            <div class="ferman-card" data-title="Keloğlan ile Padişahın Kızı" data-category="keloglan">
+                <div class="ferman-wood-roll-left"></div>
+                <div class="ferman-inner">
+                    <div class="ferman-header" onclick="toggleFerman(this)">
+                        <div class="ferman-title-group">
+                            <h3>I. Keloğlan ile Padişahın Kızı</h3>
+                            <span class="badge">Keloğlan Masalları</span>
+                        </div>
+                        <div class="seal-btn">📜 Masalı Oku</div>
+                    </div>
+                    <div class="ferman-body">
+                        <div class="preview-note">Önsöz: Zeka ve saf kalbin saray bulmacalarıyla imtihanı...</div>
+                        <div class="masal-full-text">Uzak bir diyarda anacığıyla kıt kanaat geçinen Keloğlan, padişahın fermanını duyar: <span class="masal-quote">"Kızımın sorduğu üç çetin bilmeceyi bilen kişi hem prensesle evlenecek hem de ülkeye ortak olacaktır."</span> Dünyanın dört bir yanından gelen vezirler ve bilginler sorulan çetin bilmeceler karşısında çaresiz kalır.
+
+Heybesine birkaç kuru ekmek koyup sarayın yolunu tutan Keloğlan, hazırcevaplığı ve duru zekası sayesinde tüm bilmeceleri birer birer çözer. Padişah sözünü tutar, sarayda kırk gün kırk gece düğün kurulur ve Keloğlan ülkenin sevgisini kazanır.</div>
+                        <div class="source-box">📖 Kaynakça: Tahir Alangu, Billur Köşk Masalları (Türk Halk Masalları Derlemesi)</div>
+                        <div class="ferman-actions">
+                            <button class="read-toggle-btn" onclick="toggleReadStatus(this)">☐ Okundu İşaretle</button>
+                            <div class="utility-btns">
+                                <button class="util-btn" onclick="copyMasalText(this)">📋 Kopyala</button>
+                                <button class="util-btn" onclick="window.print()">🖨️ Yazdır</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ferman-wood-roll-right"></div>
+            </div>
+
+            <!-- 2. MASAL -->
+            <div class="ferman-card" data-title="Zümrüdüanka Kuşu" data-category="diger">
+                <div class="ferman-wood-roll-left"></div>
+                <div class="ferman-inner">
+                    <div class="ferman-header" onclick="toggleFerman(this)">
+                        <div class="ferman-title-group">
+                            <h3>II. Zümrüdüanka Kuşu</h3>
+                            <span class="badge">Sihirli Masallar</span>
+                        </div>
+                        <div class="seal-btn">📜 Masalı Oku</div>
+                    </div>
+                    <div class="ferman-body">
+                        <div class="preview-note">Önsöz: Karanlık kuyulardan sihirli kanatlarla yeryüzüne kaçış...</div>
+                        <div class="masal-full-text">Sihirli bir elmanın peşinden yeraltı diyarındaki karanlık kuyulara inen yiğit şehzade, hırslı vezir çocukları tarafından dipsiz kuyuya terk edilir. Karanlıkta çaresiz beklerken, devasa bir yılanın Zümrüdüanka kuşunun yavrularına tırmandığını fark edip yılanı kılıcıyla öldürür.
+
+Yuvasına dönen ulu Zümrüdüanka kuşu, yavrularını koruyan şehzadeye minnet duyar. Şehzadeyi kanatlarının arasına alarak yer üstüne, güneşin ışığına kavuşturur. İyilik cezasız kalmaz, şehzade adaletini tecelli ettirir.</div>
+                        <div class="source-box">📖 Kaynakça: Ignác Kúnos, Türk Masalları Derlemesi (Osmanlı Masal Kültürü)</div>
+                        <div class="ferman-actions">
+                            <button class="read-toggle-btn" onclick="toggleReadStatus(this)">☐ Okundu İşaretle</button>
+                            <div class="utility-btns">
+                                <button class="util-btn" onclick="copyMasalText(this)">📋 Kopyala</button>
+                                <button class="util-btn" onclick="window.print()">🖨️ Yazdır</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ferman-wood-roll-right"></div>
+            </div>
+
+            <!-- 3. MASAL -->
+            <div class="ferman-card" data-title="Kırk Haramiler" data-category="halk">
+                <div class="ferman-wood-roll-left"></div>
+                <div class="ferman-inner">
+                    <div class="ferman-header" onclick="toggleFerman(this)">
+                        <div class="ferman-title-group">
+                            <h3>III. Kırk Haramiler</h3>
+                            <span class="badge">Halk Hikayeleri</span>
+                        </div>
+                        <div class="seal-btn">📜 Masalı Oku</div>
+                    </div>
+                    <div class="ferman-body">
+                        <div class="preview-note">Önsöz: Sihirli sözcükler ve gizli mağaranın hazineleri...</div>
+                        <div class="masal-full-text">Fakir oduncu Ali, ormanda gizlenen haramilerin dev bir kayaya <span class="masal-quote">"Açıl susam açıl!"</span> diyerek girdiğini görür. Haramiler gidince aynı sihirli kelimeyi söyleyip içeri girer ve sadece ailesine yetecek kadar altın alarak dürüstçe yaşar.
+
+Durumu fark eden hırslı kardeşi mağarada büyülü kelimeyi unutup haramilere yakalanır. Ali kıvrak zekası ve sadakati sayesinde kardeşini kurtarır, haramilerin kurduğu tüm tuzakları boşa çıkarır.</div>
+                        <div class="source-box">📖 Kaynakça: Eflatun Cem Güney, Açıl Sofram Açıl (Doğu ve Anadolu Masalları)</div>
+                        <div class="ferman-actions">
+                            <button class="read-toggle-btn" onclick="toggleReadStatus(this)">☐ Okundu İşaretle</button>
+                            <div class="utility-btns">
+                                <button class="util-btn" onclick="copyMasalText(this)">📋 Kopyala</button>
+                                <button class="util-btn" onclick="window.print()">🖨️ Yazdır</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ferman-wood-roll-right"></div>
+            </div>
+
+            <!-- 4. MASAL -->
+            <div class="ferman-card" data-title="Keloğlan ile Yılan" data-category="keloglan">
+                <div class="ferman-wood-roll-left"></div>
+                <div class="ferman-inner">
+                    <div class="ferman-header" onclick="toggleFerman(this)">
+                        <div class="ferman-title-group">
+                            <h3>IV. Keloğlan ile Yılan</h3>
+                            <span class="badge">Keloğlan Masalları</span>
+                        </div>
+                        <div class="seal-btn">📜 Masalı Oku</div>
+                    </div>
+                    <div class="ferman-body">
+                        <div class="preview-note">Önsöz: Doğaya yapılan iyiliğin karşılığını bulduğu an...</div>
+                        <div class="masal-full-text">Ormanda odun toplayan Keloğlan, ağır bir kayanın altında can çekişen ak bir yılanla karşılaşır. Merhametine yenik düşüp elleri kanayana kadar kayayı kaldırıp yılanı kurtarır. Yılan, Yılanlar Padişahı'nın oğlu çıkar.
+
+Yılan, Keloğlan'a tüm hayvanların dilini anlama yeteneği veren sihirli bir mühür taşı hediye eder. Kuşların ve doğanın fısıltılarını dinleyen Keloğlan hazineleri bulur, fakirlere yardım ederek diyarın en sevilen yiğidi olur.</div>
+                        <div class="source-box">📖 Kaynakça: Pertev Naili Boratav, Zaman Zaman İçinde (Türk Halk Edebiyatı Dizisi)</div>
+                        <div class="ferman-actions">
+                            <button class="read-toggle-btn" onclick="toggleReadStatus(this)">☐ Okundu İşaretle</button>
+                            <div class="utility-btns">
+                                <button class="util-btn" onclick="copyMasalText(this)">📋 Kopyala</button>
+                                <button class="util-btn" onclick="window.print()">🖨️ Yazdır</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ferman-wood-roll-right"></div>
+            </div>
+
+            <!-- 5. MASAL -->
+            <div class="ferman-card" data-title="Üç Turunçlar" data-category="diger">
+                <div class="ferman-wood-roll-left"></div>
+                <div class="ferman-inner">
+                    <div class="ferman-header" onclick="toggleFerman(this)">
+                        <div class="ferman-title-group">
+                            <h3>V. Üç Turunçlar</h3>
+                            <span class="badge">Sihirli Masallar</span>
+                        </div>
+                        <div class="seal-btn">📜 Masalı Oku</div>
+                    </div>
+                    <div class="ferman-body">
+                        <div class="preview-note">Önsöz: Büyülü turunçların içinden çıkan saklı güzeller...</div>
+                        <div class="masal-full-text">Rüyasındaki periyi arayan şehzade, Kaf Dağı'nın ardındaki sihirli bahçeden üç büyülü turunç koparır. Dönüş yolunda sabırsızlıkla ilk iki turunçu keser ancak içinden çıkan periler su bulamadıkları için oracıkta kaybolur.
+
+Son turunçu pınar başında açıp periye mataradaki suyu veren şehzade ona kavuşur. Kıskanç tuzakları ve büyüleri aşarak sevgilisiyle sarayda kırk gün kırk gece düğün yaparlar.</div>
+                        <div class="source-box">📖 Kaynakça: Naki Tezel, Türk Masalları (Kültür Bakanlığı Yayınları)</div>
+                        <div class="ferman-actions">
+                            <button class="read-toggle-btn" onclick="toggleReadStatus(this)">☐ Okundu İşaretle</button>
+                            <div class="utility-btns">
+                                <button class="util-btn" onclick="copyMasalText(this)">📋 Kopyala</button>
+                                <button class="util-btn" onclick="window.print()">🖨️ Yazdır</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ferman-wood-roll-right"></div>
+            </div>
+
+            <!-- 6. MASAL -->
+            <div class="ferman-card" data-title="Tahir ile Zühre" data-category="halk">
+                <div class="ferman-wood-roll-left"></div>
+                <div class="ferman-inner">
+                    <div class="ferman-header" onclick="toggleFerman(this)">
+                        <div class="ferman-title-group">
+                            <h3>VI. Tahir ile Zühre</h3>
+                            <span class="badge">Halk Hikayeleri</span>
+                        </div>
+                        <div class="seal-btn">📜 Masalı Oku</div>
+                    </div>
+                    <div class="ferman-body">
+                        <div class="preview-note">Önsöz: Ayrılıkların ve engellerin gölgesinde ölümsüz aşk...</div>
+                        <div class="masal-full-text">Padişah oğlu Tahir ile Vezir kızı Zühre çocukluktan itibaren sevdalanıp birbirlerine bağlanırlar. Ancak zalim padişah fitnecilerin sözüyle sevdalıları ayırıp Tahir'i zindanlara ve diyar diyar sürgüne gönderir.
+
+Tahir'in bağlamasıyla söylediği türküler ve duyduğu sadakat ne zindanlarda ne uzak yollarda söner. İki sevdalının engellere karşı direnişi Türk kültüründe ölümsüz aşkın sembolü olur.</div>
+                        <div class="source-box">📖 Kaynakça: Umay Günay, Elazığ Masalları ve Türk Halk Anlatıları</div>
+                        <div class="ferman-actions">
+                            <button class="read-toggle-btn" onclick="toggleReadStatus(this)">☐ Okundu İşaretle</button>
+                            <div class="utility-btns">
+                                <button class="util-btn" onclick="copyMasalText(this)">📋 Kopyala</button>
+                                <button class="util-btn" onclick="window.print()">🖨️ Yazdır</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ferman-wood-roll-right"></div>
+            </div>
+
+            <!-- 7. MASAL -->
+            <div class="ferman-card" data-title="Altın Saçlı Kız" data-category="diger">
+                <div class="ferman-wood-roll-left"></div>
+                <div class="ferman-inner">
+                    <div class="ferman-header" onclick="toggleFerman(this)">
+                        <div class="ferman-title-group">
+                            <h3>VII. Altın Saçlı Kız</h3>
+                            <span class="badge">Sihirli Masallar</span>
+                        </div>
+                        <div class="seal-btn">📜 Masalı Oku</div>
+                    </div>
+                    <div class="ferman-body">
+                        <div class="preview-note">Önsöz: Güneşten parlayan saçlar ve maceralı bir diyar...</div>
+                        <div class="masal-full-text">Güneş ışığı gibi sırma saçlara sahip yardımsever kız, sihirli bülbülün peşinden giderek devler ülkesine varır. Yolda karşılaştığı ak saçlı nineye ekmeğini böler, aç kurtları doyurur.
+
+Ninenin verdiği sihirli tarak ve ayna sayesinde arkasından gelen devlerin takibinden kurtulup köyüne döner. Saçlarının parıltısı ve kalbinin iyiliğiyle diyarına bereket getirir.</div>
+                        <div class="source-box">📖 Kaynakça: Saim Sakaoğlu, Gümüşhane Masalları (Folklor Araştırmaları)</div>
+                        <div class="ferman-actions">
+                            <button class="read-toggle-btn" onclick="toggleReadStatus(this)">☐ Okundu İşaretle</button>
+                            <div class="utility-btns">
+                                <button class="util-btn" onclick="copyMasalText(this)">📋 Kopyala</button>
+                                <button class="util-btn" onclick="window.print()">🖨️ Yazdır</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ferman-wood-roll-right"></div>
+            </div>
+
+            <!-- 8. MASAL -->
+            <div class="ferman-card" data-title="Köroğlu" data-category="halk">
+                <div class="ferman-wood-roll-left"></div>
+                <div class="ferman-inner">
+                    <div class="ferman-header" onclick="toggleFerman(this)">
+                        <div class="ferman-title-group">
+                            <h3>VIII. Köroğlu</h3>
+                            <span class="badge">Halk Hikayeleri</span>
+                        </div>
+                        <div class="seal-btn">📜 Masalı Oku</div>
+                    </div>
+                    <div class="ferman-body">
+                        <div class="preview-note">Önsöz: Bolu Beyine karşı Çamlıbel'de yakılan adalet destanı...</div>
+                        <div class="masal-full-text">Zalim Bolu Beyi seyis Yusuf'un gözlerine mil çektirir. Oğlu Ali, babasının acısıyla Çamlıbel dağlarına çıkıp <span class="masal-quote">"Köroğlu"</span> adını alır ve Sakarya sularından çıkan Kırat'ı büyütür.
+
+Çamlıbel'i mesken tutan Köroğlu, sazı ve kılıcıyla zalim beylere karşı durur, mazlumlara kalkan olarak Türk dünyasında adalet tutkusunun en büyük kahramanı olur.</div>
+                        <div class="source-box">📖 Kaynakça: Pertev Naili Boratav, Köroğlu Destanı (Halk Edebiyatı Monografisi)</div>
+                        <div class="ferman-actions">
+                            <button class="read-toggle-btn" onclick="toggleReadStatus(this)">☐ Okundu İşaretle</button>
+                            <div class="utility-btns">
+                                <button class="util-btn" onclick="copyMasalText(this)">📋 Kopyala</button>
+                                <button class="util-btn" onclick="window.print()">🖨️ Yazdır</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ferman-wood-roll-right"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>Programlamaya Giriş Projesi | Türk Masalları Etnik Web Projesi</p>
+        <p class="footer-heritage-note">🏛️ UNESCO Somut Olmayan Kültürel Miras Anlayışıyla Hazırlanmıştır.</p>
+    </footer>
+
+    <!-- Harici JavaScript Bağlantısı -->
+    <script src="script.js"></script>
+
+</body>
+</html>
